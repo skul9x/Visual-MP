@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Gradient Colors -->
+    <color name="gradient_start">#667EEA</color>
+    <color name="gradient_middle">#764BA2</color>
+    <color name="gradient_end">#F093FB</color>
+    
+    <!-- Secondary Gradient (Sunset) -->
+    <color name="gradient_sunset_start">#FA709A</color>
+    <color name="gradient_sunset_end">#FEE140</color>
+    
+    <!-- Accent Gradient (Ocean) -->
+    <color name="gradient_ocean_start">#4FACFE</color>
+    <color name="gradient_ocean_end">#00F2FE</color>
+    
+    <!-- Primary colors -->
+    <color name="purple_primary">#7C4DFF</color>
+    <color name="purple_primary_light">#B47CFF</color>
+    <color name="purple_primary_dark">#3F1DCB</color>
+    
+    <!-- Secondary colors -->
+    <color name="teal_secondary">#00E5FF</color>
+    <color name="pink_accent">#FF4081</color>
+    
+    <!-- Background colors - Dark Theme -->
+    <color name="background_dark">#0D0D0D</color>
+    <color name="background_dark_elevated">#121212</color>
+    <color name="surface_dark">#1A1A2E</color>
+    <color name="surface_dark_variant">#16213E</color>
+    <color name="card_dark">#1F1F3D</color>
+    
+    <!-- Text colors -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#B3B3B3</color>
+    <color name="text_tertiary">#666666</color>
+    
+    <!-- Overlay colors -->
+    <color name="overlay_dark">#80000000</color>
+    <color name="overlay_gradient">#CC000000</color>
+    
+    <!-- Player colors -->
+    <color name="player_seekbar_active">#7C4DFF</color>
+    <color name="player_seekbar_inactive">#404040</color>
+    
+    <!-- Status colors -->
+    <color name="now_playing_indicator">#00E676</color>
+</resources>

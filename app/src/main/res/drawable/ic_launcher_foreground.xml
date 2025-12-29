@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Stylized "V" logo centered in the 72dp safe zone -->
+    <path
+        android:pathData="M38,34 L54,74 L70,34 L82,34 L59,85 C57,89 51,89 49,85 L26,34 Z"
+        android:fillType="evenOdd">
+        <aapt:attr name="android:fillColor" xmlns:aapt="http://schemas.android.com/aapt">
+            <gradient 
+                android:startX="26" 
+                android:startY="34" 
+                android:endX="82" 
+                android:endY="85" 
+                android:type="linear">
+                <item android:offset="0" android:color="#FF00E5FF"/>
+                <item android:offset="0.5" android:color="#FFD500F9"/>
+                <item android:offset="1" android:color="#FFFF1744"/>
+            </gradient>
+        </aapt:attr>
+    </path>
+    
+    <!-- Optional: Subtle circle accent behind -->
+    <path
+        android:pathData="M54,54m-28,0a28,28 0 1,1 56,0a28,28 0 1,1 -56,0"
+        android:strokeWidth="1.5"
+        android:strokeColor="#33FFFFFF" />
+        
+</vector>

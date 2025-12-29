@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark"
+    tools:context=".MainActivity">
+
+    <!-- 1. Full Screen Album Art -->
+    <!-- 1. Full Screen Album Art as ViewPager2 -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vpAlbumArt"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 2. Dark Overlay with Gradient for Contrast -->
+    <View
+        android:id="@+id/viewOverlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_gradient_overlay_black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Top Bar Buttons -->
+    <!-- Changed Back to Settings button -->
+    <ImageButton
+        android:id="@+id/btnSettings"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_settings"
+        app:tint="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnEditMetadata"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_edit"
+        app:tint="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 3. Centered Controls Container -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/controlsContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="48dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_max="600dp">
+
+        <!-- Song Title -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Song Title"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Artist -->
+        <TextView
+            android:id="@+id/tvArtist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Artist Name"
+            android:textSize="18sp"
+            android:textColor="#DDFFFFFF"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+        <!-- Seek Bar -->
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:progressTint="@color/purple_primary"
+            android:thumbTint="@color/purple_primary"
+            android:progressBackgroundTint="#88FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/tvArtist" />
+
+        <!-- Times -->
+        <TextView
+            android:id="@+id/tvCurrentTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="0:00"
+            android:textColor="#CCFFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/seekBar"
+            app:layout_constraintStart_toStartOf="@id/seekBar" />
+
+        <TextView
+            android:id="@+id/tvTotalTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="0:00"
+            android:textColor="#CCFFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/seekBar"
+            app:layout_constraintEnd_toEndOf="@id/seekBar" />
+
+        <!-- Buttons Row -->
+        <LinearLayout
+            android:id="@+id/controlsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/tvCurrentTime">
+
+            <ImageButton
+                android:id="@+id/btnShuffle"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_shuffle"
+                app:tint="@android:color/white"
+                android:layout_marginEnd="16dp" />
+
+            <ImageButton
+                android:id="@+id/btnPrevious"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_previous"
+                android:scaleType="fitCenter"
+                android:padding="12dp"
+                app:tint="@android:color/white"
+                android:layout_marginEnd="16dp" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnPlayPause"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_play"
+                android:background="@drawable/bg_button_gradient"
+                android:padding="20dp"
+                android:scaleType="centerInside"
+                android:contentDescription="Play/Pause"
+                android:elevation="8dp"
+                android:layout_marginHorizontal="16dp" />
+
+            <ImageButton
+                android:id="@+id/btnNext"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_next"
+                android:scaleType="fitCenter"
+                android:padding="12dp"
+                app:tint="@android:color/white"
+                android:layout_marginStart="16dp" />
+
+            <ImageButton
+                android:id="@+id/btnRepeat"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_repeat"
+                app:tint="@android:color/white"
+                android:layout_marginStart="16dp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

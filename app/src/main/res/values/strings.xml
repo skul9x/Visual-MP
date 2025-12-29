@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">VisualMP</string>
+    <string name="permission_rationale">Ứng dụng cần quyền truy cập để quét và phát các file nhạc trên thiết bị của bạn.</string>
+    <string name="grant_permission">Cấp quyền</string>
+    <string name="no_songs_found">Không tìm thấy bài hát nào</string>
+    <string name="songs_count">%d bài hát</string>
+    <string name="now_playing">Đang phát</string>
+    <string name="unknown_artist">Nghệ sĩ không xác định</string>
+    <string name="unknown_album">Album không xác định</string>
+</resources>

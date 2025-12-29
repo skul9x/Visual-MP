@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_gradient">
+
+    <!-- Header with gradient -->
+    <View
+        android:id="@+id/viewHeader"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:background="@drawable/bg_gradient_primary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Close button -->
+    <ImageButton
+        android:id="@+id/btnClose"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="12dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_close"
+        android:contentDescription="Close"
+        app:tint="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tvDialogTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Sửa thông tin"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnClose" />
+
+    <TextView
+        android:id="@+id/tvDialogSubtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Chỉnh sửa metadata bài hát"
+        android:textSize="14sp"
+        android:textColor="@android:color/white"
+        android:alpha="0.8"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/tvDialogTitle"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Album Art Preview -->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivAlbumArt"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="24dp"
+        android:translationY="-20dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_music_note"
+        android:background="@color/card_dark"
+        android:elevation="8dp"
+        app:shapeAppearanceOverlay="@style/RoundedCorner"
+        app:layout_constraintTop_toBottomOf="@id/viewHeader"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Delete Cover Button -->
+    <ImageButton
+        android:id="@+id/btnDeleteCover"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:translationY="-20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/bg_play_button"
+        android:backgroundTint="@color/card_dark"
+        android:src="@drawable/ic_delete"
+        android:padding="8dp"
+        app:tint="#FF5252"
+        app:layout_constraintStart_toEndOf="@id/ivAlbumArt"
+        app:layout_constraintTop_toTopOf="@id/ivAlbumArt" />
+
+    <!-- AI Generate Button -->
+    <ImageButton
+        android:id="@+id/btnGenerateCover"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:translationY="-20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_play_button"
+        android:backgroundTint="@color/purple_primary"
+        android:src="@drawable/ic_image"
+        android:padding="8dp"
+        app:tint="@android:color/white"
+        app:layout_constraintStart_toEndOf="@id/ivAlbumArt"
+        app:layout_constraintTop_toBottomOf="@id/btnDeleteCover" />
+
+    <!-- Search Online Button -->
+    <ImageButton
+        android:id="@+id/btnSearchOnline"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:translationY="-20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_play_button"
+        android:backgroundTint="#009688"
+        android:src="@drawable/ic_search"
+        android:padding="8dp"
+        app:tint="@android:color/white"
+        app:layout_constraintStart_toEndOf="@id/ivAlbumArt"
+        app:layout_constraintTop_toBottomOf="@id/btnGenerateCover" />
+
+    <!-- Form Fields -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/ivAlbumArt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingBottom="16dp">
+
+            <!-- Title field -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tiêu đề"
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginBottom="6dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeColor="@color/purple_primary"
+                app:hintEnabled="false"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp"
+                    android:maxLines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Artist field -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nghệ sĩ"
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginBottom="6dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilArtist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeColor="@color/purple_primary"
+                app:hintEnabled="false"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etArtist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp"
+                    android:maxLines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Album field -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Album"
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginBottom="6dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilAlbum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeColor="@color/purple_primary"
+                app:hintEnabled="false"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAlbum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp"
+                    android:maxLines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- File path (read only) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đường dẫn"
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="6dp" />
+
+            <TextView
+                android:id="@+id/tvFilePath"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="/path/to/file.mp3"
+                android:textSize="13sp"
+                android:textColor="@color/text_tertiary"
+                android:background="@drawable/bg_card_dark"
+                android:padding="12dp"
+                android:maxLines="2"
+                android:ellipsize="middle" />
+
+            <!-- Action buttons moved inside ScrollView to ensure visibility with keyboard -->
+            <LinearLayout
+                android:id="@+id/layoutButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="24dp"
+                android:gravity="end">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:text="Hủy"
+                    android:textColor="@color/text_secondary"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    app:rippleColor="@color/purple_primary" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="12dp"
+                    android:text="Lưu thay đổi"
+                    android:textColor="@android:color/white"
+                    app:icon="@drawable/ic_save"
+                    app:iconTint="@android:color/white"
+                    app:backgroundTint="@color/purple_primary"
+                    app:cornerRadius="24dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

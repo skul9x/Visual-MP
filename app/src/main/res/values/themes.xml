@@ -1,0 +1,85 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme - Dark Premium -->
+    <style name="Base.Theme.VisualMP" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/purple_primary</item>
+        <item name="colorPrimaryVariant">@color/purple_primary_dark</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/teal_secondary</item>
+        <item name="colorOnSecondary">@android:color/black</item>
+        
+        <!-- Background -->
+        <item name="android:colorBackground">@color/background_dark</item>
+        <item name="colorSurface">@color/surface_dark</item>
+        <item name="colorSurfaceVariant">@color/surface_dark_variant</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
+        
+        <!-- Status bar -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/background_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+        
+        <!-- FAB -->
+        <item name="floatingActionButtonStyle">@style/Widget.VisualMP.FAB</item>
+    </style>
+
+    <style name="Theme.VisualMP" parent="Base.Theme.VisualMP" />
+    
+    <!-- Custom FAB style -->
+    <style name="Widget.VisualMP.FAB" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="backgroundTint">@color/purple_primary</item>
+        <item name="tint">@android:color/white</item>
+        <item name="elevation">8dp</item>
+    </style>
+    
+    <!-- Rounded corner styles for images -->
+    <style name="RoundedCorner" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+    
+    <style name="RoundedCornerLarge" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
+    
+    <!-- Text styles -->
+    <style name="TextAppearance.VisualMP.Title" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+    
+    <style name="TextAppearance.VisualMP.Subtitle" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+    
+    <!-- SeekBar style -->
+    <style name="Widget.VisualMP.SeekBar" parent="Widget.Material3.Slider">
+        <item name="thumbColor">@color/purple_primary</item>
+        <item name="trackColorActive">@color/purple_primary</item>
+        <item name="trackColorInactive">@color/player_seekbar_inactive</item>
+    </style>
+
+    <!-- BottomSheet Dialog style -->
+    <style name="Theme.VisualMP.BottomSheet" parent="Theme.Material3.Dark.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.VisualMP.BottomSheet</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+    
+    <style name="Widget.VisualMP.BottomSheet" parent="Widget.Material3.BottomSheet">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.VisualMP.BottomSheet</item>
+    </style>
+    
+    <style name="ShapeAppearance.VisualMP.BottomSheet" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">24dp</item>
+        <item name="cornerSizeTopRight">24dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+</resources>
