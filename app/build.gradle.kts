@@ -57,6 +57,7 @@ dependencies {
     // Media3 - ExoPlayer + MediaSession (replaces old MediaPlayer + MediaSessionCompat)
     implementation("androidx.media3:media3-exoplayer:1.5.1")
     implementation("androidx.media3:media3-session:1.5.1")
+    implementation("androidx.media3:media3-ui:1.5.1")
     
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

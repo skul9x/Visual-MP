@@ -8,17 +8,6 @@
     android:background="@drawable/bg_gradient_main"
     tools:context=".MainActivity">
 
-    <!-- Dynamic Blur Background from Album Art -->
-    <ImageView
-        android:id="@+id/ivBlurBackground"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        android:alpha="0.6"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Top bar -->
     <!-- Removed Back Button since this is Main Screen -->

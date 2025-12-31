@@ -55,7 +55,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.transition.TransitionManager
 import com.skul9x.visualmp.util.ResponsiveUtils
-import jp.wasabeef.glide.transformations.BlurTransformation
 
 class MainActivity : AppCompatActivity() {
 
@@ -87,9 +86,12 @@ class MainActivity : AppCompatActivity() {
     private var progressAnimator: android.animation.ValueAnimator? = null
 
     private val permissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        val readAudioGranted = permissions[Manifest.permission.READ_MEDIA_AUDIO] == true ||
+                               permissions[Manifest.permission.READ_EXTERNAL_STORAGE] == true
+        
+        if (readAudioGranted) {
             viewModel.loadSongs()
         } else {
             Toast.makeText(this, "Cần cấp quyền để quét nhạc", Toast.LENGTH_LONG).show()
@@ -170,33 +172,54 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        bindMusicService()
+        if (!isBound) {
+            bindMusicService()
+        } else {
+            // Re-setup callbacks when returning from background
+            setupServiceCallbacks()
+        }
     }
 
     override fun onStop() {
         super.onStop()
         stopProgressUpdates()
+        // Don't unbind service here - keep it running in background!
+        // Just clear callbacks to prevent memory leaks
         if (isBound) {
-            // Clear callbacks to prevent crashes if Service tries to update destroyed Activity
             musicService?.onSongChanged = null
             musicService?.onPlaybackStateChanged = null
-            
+        }
+    }
+    
+    override fun onDestroy() {
+        // Only unbind when Activity is truly destroyed
+        if (isBound) {
             unbindService(serviceConnection)
             isBound = false
         }
+        super.onDestroy()
     }
 
     private fun checkPermissionsAndLoad() {
-        val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            Manifest.permission.READ_MEDIA_AUDIO
+        val permissionsToRequest = mutableListOf<String>()
+
+        // 1. Audio file permission
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            permissionsToRequest.add(Manifest.permission.READ_MEDIA_AUDIO)
+            // 2. Notification permission (required for foreground service on Android 13+)
+            permissionsToRequest.add(Manifest.permission.POST_NOTIFICATIONS)
         } else {
-            Manifest.permission.READ_EXTERNAL_STORAGE
+            permissionsToRequest.add(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
 
-        if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED) {
+        val notGrantedPermissions = permissionsToRequest.filter {
+            ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
+        }
+
+        if (notGrantedPermissions.isEmpty()) {
             viewModel.loadSongs()
         } else {
-            permissionLauncher.launch(permission)
+            permissionLauncher.launch(notGrantedPermissions.toTypedArray())
         }
     }
 
@@ -307,9 +330,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun bindMusicService() {
         val intent = Intent(this, MusicPlayerService::class.java)
-        // DO NOT call startForegroundService() manually!
-        // MediaSessionService automatically handles foreground lifecycle when media is playing.
-        // Calling startForegroundService() without immediate startForeground() causes crash on Android 12+
+        // Start as foreground service first - MediaSessionService will handle notification
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(intent)
+        } else {
+            startService(intent)
+        }
+        // Then bind for direct communication
         bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
     }
 
@@ -410,31 +437,11 @@ class MainActivity : AppCompatActivity() {
             // For now, simple interaction: Play starts from 0.
             binding.seekBar.isEnabled = false 
         }
-        
-        // Update dynamic blur background
-        updateBlurBackground(displayed)
     }
-
+    
     private fun updatePlayPauseButton(isPlaying: Boolean) {
         // Just trigger UI update to check state matches
         updatePlayerUI()
-    }
-    
-    /**
-     * Updates the blur background based on the displayed song's album art
-     */
-    private fun updateBlurBackground(song: Song) {
-        val blurBg = binding.ivBlurBackground ?: return
-        val coverArtUri = CoverArtFetcher.getCoverArtUri(this, song.id, song.albumArtUri)
-        
-        Glide.with(this)
-            .load(coverArtUri)
-            .transform(BlurTransformation(25, 3)) // radius: 25, sampling: 3
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .signature(ObjectKey(CoverArtFetcher.getCoverArtSignature(this, song.id)))
-            .placeholder(R.drawable.bg_gradient_main)
-            .error(R.drawable.bg_gradient_main)
-            .into(blurBg)
     }
     
     private fun updateShuffleButton() {
